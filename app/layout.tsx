@@ -6,9 +6,12 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "精密 X 射线技术｜企业官网 Demo",
-  description: "X 射线管、高压电源及一体化射线源研发制造企业官网概念方案。",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  metadataBase: new URL("https://precision-xray-demo.szw19980501.chatgpt.site"),
+  title: "YONC优能创｜高端低能X射线管",
+  description: "优能创（上海）电气科技有限公司，专业研发、生产、销售高端低能X射线管及配套服务。",
+  icons: { icon: "/yonc-logo.jpg", shortcut: "/yonc-logo.jpg" },
+  openGraph: { title: "YONC优能创｜高端低能X射线管", description: "以质量为保障，以创新为动力。", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "YONC优能创｜高端低能X射线管", description: "以质量为保障，以创新为动力。", images: ["/og.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

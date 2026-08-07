@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <main className="inner-page">
       <SiteHeader />
-      <section className="inner-hero about-hero"><div><p>ABOUT YONC</p><h1>以质量为保障<br/><em>以创新为动力</em></h1><span>专业研发、生产、销售高端低能X射线管及配套服务</span></div></section>
+      <section className="inner-hero about-hero"><div><nav className="breadcrumbs dark" aria-label="面包屑"><a href="/">首页</a><span>/</span><b>关于优能创</b></nav><p>ABOUT YONC</p><h1>以质量为保障<br/><em>以创新为动力</em></h1><span>专业研发、生产、销售高端低能X射线管及配套服务</span></div></section>
       <section className="about-overview">
         <div className="inner-label">01 · COMPANY PROFILE</div>
         <div><p className="kicker">优能创（上海）电气科技有限公司</p><h2>专注低能X射线技术<br/>服务精密分析与工业检测</h2></div>

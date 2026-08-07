@@ -14,21 +14,27 @@ const slides = [
 export default function Home() {
   const [activeProduct, setActiveProduct] = useState(0);
   const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const onScroll = () => document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`);
     onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const timer = reduced ? undefined : window.setInterval(() => setSlide(v => (v + 1) % slides.length), 6500);
-    return () => { window.removeEventListener("scroll", onScroll); if (timer) window.clearInterval(timer); };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (paused || reduced) return;
+    const timer = window.setInterval(() => setSlide(v => (v + 1) % slides.length), 6500);
+    return () => window.clearInterval(timer);
+  }, [paused]);
 
   const go = (index: number) => setSlide((index + slides.length) % slides.length);
 
   return (
     <main>
       <SiteHeader />
-      <section className="hero" id="top" aria-roledescription="carousel" aria-label="YONC品牌展示">
+      <section className="hero" id="top" aria-roledescription="carousel" aria-label="YONC品牌展示" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
         {slides.map((item, index) => <div key={item.image} className={`hero-image ${slide === index ? "active" : ""} ${index === 1 ? "factory-slide" : ""}`} style={{ backgroundImage: `url('${item.image}')` }} aria-hidden={slide !== index} />)}
         <div className="hero-grid" />
         <div className="hero-content" key={slide}>
@@ -41,6 +47,7 @@ export default function Home() {
           <button onClick={() => go(slide - 1)} aria-label="上一张">←</button>
           <div className="hero-index"><b>0{slide + 1}</b><i style={{ "--progress": `${(slide + 1) * 25}%` } as React.CSSProperties}/><span>04</span></div>
           <button onClick={() => go(slide + 1)} aria-label="下一张">→</button>
+          <button className="pause-control" onClick={() => setPaused(value => !value)} aria-label={paused ? "继续自动轮播" : "暂停自动轮播"}>{paused ? "▶" : "Ⅱ"}</button>
         </div>
         <div className="hero-dots">{slides.map((_, i) => <button key={i} className={slide === i ? "active" : ""} onClick={() => go(i)} aria-label={`查看第${i + 1}张`} />)}</div>
         <div className="hero-stat"><small>YONC CORE VALUE</small><b>5</b><span>道核心质量工序</span></div>
@@ -65,7 +72,7 @@ export default function Home() {
       <section className="products" id="products">
         <div className="section-head"><div className="section-label light"><span>02</span> PRODUCTS</div><h2>核心产品</h2><p>面向分析、成像与工业检测<br/>提供可靠的低能X射线核心部件</p></div>
         <div className="product-stage">
-          <div className="product-list">{products.map((p, i) => <button key={p.n} className={activeProduct === i ? "active" : ""} onMouseEnter={() => setActiveProduct(i)} onClick={() => setActiveProduct(i)}><small>{p.n}</small><span>{p.title}</span><b>↗</b></button>)}</div>
+          <div className="product-list">{products.map((p, i) => <a href={`/products/${p.slug}`} key={p.n} className={activeProduct === i ? "active" : ""} onMouseEnter={() => setActiveProduct(i)} onFocus={() => setActiveProduct(i)}><small>{p.n}</small><span>{p.title}</span><b>↗</b></a>)}</div>
           <div className="product-detail" key={activeProduct}>
             <div className="orb"><span>{products[activeProduct].n}</span><i/><i/><i/></div>
             <p>{products[activeProduct].en}</p><h3>{products[activeProduct].title}</h3><div className="rule"/><blockquote>{products[activeProduct].desc}</blockquote>
@@ -87,7 +94,15 @@ export default function Home() {
       </section>
 
       <section className="service" id="service"><div><p className="eyebrow"><span/> SERVICE & SUPPORT</p><h2>不止交付产品<br/>更交付长期可靠</h2></div><div className="service-grid"><article><b>01</b><h3>选型支持</h3><p>结合应用、结构与系统条件，为客户提供产品选型与适配建议。</p></article><article><b>02</b><h3>配套服务</h3><p>围绕X射线管应用提供专业、及时、热情的配套服务。</p></article><article><b>03</b><h3>联合定制</h3><p>针对特殊应用需求，协同推进结构、工艺与性能验证。</p></article></div></section>
-      <section className="contact" id="contact"><div><p>START A PROJECT</p><h2>让我们一起<br/>解决下一个<span>精密难题</span></h2></div><a href="/about">了解优能创 <b>↗</b></a><small>域名 yonc.cn · 电话、邮箱与地址待客户最终确认</small></section>
+      <section className="contact" id="contact">
+        <div className="contact-lead"><p>START A PROJECT</p><h2>让我们一起<br/>解决下一个<span>精密难题</span></h2><span>针对产品选型、应用适配与研发定制需求，我们期待与您进一步沟通。</span></div>
+        <div className="contact-info">
+          <article><small>PHONE</small><b>待客户补充</b><span>技术咨询电话</span></article>
+          <article><small>EMAIL</small><b>待客户补充</b><span>商务与项目需求</span></article>
+          <article><small>ADDRESS</small><b>上海 · 详细地址待补充</b><span>优能创（上海）电气科技有限公司</span></article>
+          <p>正式联系方式确认后，本区域将开放电话、邮件和微信咨询入口。</p>
+        </div>
+      </section>
       <SiteFooter />
     </main>
   );

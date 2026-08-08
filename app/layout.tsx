@@ -4,9 +4,12 @@ import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const publicSiteUrl = process.env.GITHUB_PAGES === "true"
+  ? "https://szwtest111.github.io"
+  : "https://precision-xray-demo.szw19980501.chatgpt.site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://precision-xray-demo.szw19980501.chatgpt.site"),
+  metadataBase: new URL(publicSiteUrl),
   title: "YONC优能创｜高端低能X射线管",
   description: "优能创（上海）电气科技有限公司，专业研发、生产、销售高端低能X射线管及配套服务。",
   icons: { icon: "/yonc-logo.jpg", shortcut: "/yonc-logo.jpg" },

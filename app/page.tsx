@@ -7,14 +7,13 @@ import { processSteps, products } from "./site-data";
 const slides = [
   { image: "/hero-xray.png", eyebrow: "PRECISION X-RAY TECHNOLOGY", title: <>洞见微观<br/><em>定义精密</em></>, copy: <>专注高端低能X射线管及配套服务<br/>以精密制造，赋能每一次可靠检测</> },
   { image: "/yonc-factory.jpg", eyebrow: "YONC · SHANGHAI", title: <>扎根制造<br/><em>长期可靠</em></>, copy: <>优能创（上海）电气科技有限公司<br/>研发、生产、销售与配套服务一体化</> },
-  { image: "/hero-manufacturing.png", eyebrow: "QUALITY IN EVERY DETAIL", title: <>严苛工艺<br/><em>全程品控</em></>, copy: <>从原材料检验到老化测试<br/>每支产品均经过全参数检测</> },
+  { image: "/images/hero-process-candidates/yonc-process-01-glass-sealing.png", eyebrow: "PRECISION FLAME SEALING", title: <>精密封接<br/><em>稳定如一</em></>, copy: <>多火焰均匀加热与精密工装协同<br/>让可靠性始于每一道封接工序</> },
   { image: "/hero-application.png", eyebrow: "ENGINEERED FOR APPLICATIONS", title: <>多元应用<br/><em>精准适配</em></>, copy: <>服务荧光分析、工业成像、衍射分析<br/>厚度、密度与应力测量等领域</> },
 ];
 
 export default function Home() {
   const [activeProduct, setActiveProduct] = useState(0);
   const [slide, setSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const onScroll = () => document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`);
@@ -24,17 +23,17 @@ export default function Home() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (paused || reduced) return;
-    const timer = window.setInterval(() => setSlide(v => (v + 1) % slides.length), 6500);
-    return () => window.clearInterval(timer);
-  }, [paused]);
+    if (reduced) return;
+    const timer = window.setTimeout(() => setSlide(v => (v + 1) % slides.length), 6500);
+    return () => window.clearTimeout(timer);
+  }, [slide]);
 
   const go = (index: number) => setSlide((index + slides.length) % slides.length);
 
   return (
     <main>
       <SiteHeader />
-      <section className="hero" id="top" aria-roledescription="carousel" aria-label="YONC品牌展示" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <section className="hero" id="top" aria-roledescription="carousel" aria-label="YONC品牌展示">
         {slides.map((item, index) => <div key={item.image} className={`hero-image ${slide === index ? "active" : ""} ${index === 1 ? "factory-slide" : ""}`} style={{ backgroundImage: `url('${item.image}')` }} aria-hidden={slide !== index} />)}
         <div className="hero-grid" />
         <div className="hero-content" key={slide}>
@@ -43,11 +42,9 @@ export default function Home() {
           <p className="hero-copy">{slides[slide].copy}</p>
           <div className="hero-actions"><a href="#products" className="primary">探索产品 <b>↗</b></a><a href="/about" className="text-link">了解优能创 <span>→</span></a></div>
         </div>
-        <div className="hero-controls">
-          <button onClick={() => go(slide - 1)} aria-label="上一张">←</button>
-          <div className="hero-index"><b>0{slide + 1}</b><i style={{ "--progress": `${(slide + 1) * 25}%` } as React.CSSProperties}/><span>04</span></div>
-          <button onClick={() => go(slide + 1)} aria-label="下一张">→</button>
-          <button className="pause-control" onClick={() => setPaused(value => !value)} aria-label={paused ? "继续自动轮播" : "暂停自动轮播"}>{paused ? "▶" : "Ⅱ"}</button>
+        <div className="hero-nav">
+          <button className="hero-prev" onClick={() => go(slide - 1)} aria-label="上一张轮播图">←</button>
+          <button className="hero-next" onClick={() => go(slide + 1)} aria-label="下一张轮播图">→</button>
         </div>
         <div className="hero-dots">{slides.map((_, i) => <button key={i} className={slide === i ? "active" : ""} onClick={() => go(i)} aria-label={`查看第${i + 1}张`} />)}</div>
         <div className="hero-stat"><small>YONC CORE VALUE</small><b>5</b><span>道核心质量工序</span></div>

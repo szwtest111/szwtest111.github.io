@@ -2,49 +2,88 @@ export type Product = {
   slug: string;
   n: string;
   title: string;
-  en: string;
   desc: string;
-  applications: string[];
-  features: string[];
+  items: string[];
+  status: "资料已列明" | "待后续更新";
 };
 
+// 产品目录以客户提供的《资料(1).docx》为唯一依据。
+// 未经客户确认的型号、用途、性能卖点和英文产品名不在网站中展示。
 export const products: Product[] = [
   {
-    slug: "structure-analysis",
+    slug: "xray-tube-packaging",
     n: "01",
-    title: "结构分析X射线管",
-    en: "STRUCTURAL ANALYSIS X-RAY TUBE",
-    desc: "面向材料结构、晶相与衍射分析场景，为分析设备提供稳定、可靠的低能X射线核心部件。",
-    applications: ["衍射分析", "应力分析", "材料结构研究"],
-    features: ["稳定输出", "精密封装", "适配定制"],
+    title: "X射线管封装系列",
+    desc: "客户资料当前列明四个封装方向；具体结构、型号、材料规格与技术参数待客户进一步补充。",
+    items: ["不锈钢封装", "进口替代", "低功率不锈钢封装", "黄铜封装"],
+    status: "资料已列明",
   },
   {
-    slug: "fluorescence-analysis",
+    slug: "microfocus-xray-tube",
     n: "02",
-    title: "荧光分析X射线管",
-    en: "X-RAY FLUORESCENCE TUBE",
-    desc: "针对元素成分与荧光分析需求开发，兼顾输出稳定性、使用寿命与仪器适配效率。",
-    applications: ["荧光分析", "元素检测", "成分分析"],
-    features: ["低能高效", "性能稳定", "多场景适配"],
+    title: "微焦点X射线管",
+    desc: "客户资料当前列明三档焦点规格；具体型号、功率、电压及应用信息待客户进一步补充。",
+    items: ["35um焦点X射线管", "50um焦点X射线管", "100um焦点X射线管"],
+    status: "资料已列明",
   },
   {
-    slug: "thickness-gauge",
+    slug: "import-repair-replacement",
     n: "03",
-    title: "测厚X射线管",
-    en: "THICKNESS GAUGE X-RAY TUBE",
-    desc: "服务于工业在线与离线厚度测量，为金属、涂层及相关材料检测提供稳定射线源。",
-    applications: ["厚度测量", "密度测量", "在线检测"],
-    features: ["连续稳定", "响应可靠", "工程适配"],
+    title: "进口维修替代",
+    desc: "客户资料已列明进口维修替代方向；适配品牌、型号范围、维修内容与交付标准待客户进一步补充。",
+    items: ["具体适配品牌待补充", "具体型号范围待补充"],
+    status: "资料已列明",
   },
   {
-    slug: "industrial-ndt",
+    slug: "anode-xray-tube",
     n: "04",
-    title: "工业探伤X射线管",
-    en: "INDUSTRIAL NDT X-RAY TUBE",
-    desc: "适用于工业成像与无损检测场景，支持内部结构、缺陷与装配质量的可视化判断。",
-    applications: ["工业成像", "无损检测", "内部缺陷检测"],
-    features: ["成像清晰", "严苛品控", "可靠耐用"],
+    title: "阳极X射线管",
+    desc: "客户资料已列明阳极X射线管系列；下属型号、结构形式及技术参数待客户进一步补充。",
+    items: ["具体产品型号待补充", "产品实拍资料待补充"],
+    status: "资料已列明",
   },
+  {
+    slug: "high-voltage-power-supply",
+    n: "05",
+    title: "高压电源系列",
+    desc: "客户资料当前列明30KV、50KV与65KV三个电压档位；详细电气参数和适配信息待客户进一步补充。",
+    items: ["30KV", "50KV", "65KV"],
+    status: "资料已列明",
+  },
+  {
+    slug: "research-customization",
+    n: "06",
+    title: "研发定制",
+    desc: "客户资料已列明研发定制方向；定制范围、合作流程、技术边界与交付方式待客户进一步补充。",
+    items: ["具体定制范围待补充", "合作流程待补充"],
+    status: "资料已列明",
+  },
+  {
+    slug: "integrated-xray-source",
+    n: "07",
+    title: "一体化射线源",
+    desc: "客户原始资料标注为后续更新内容，当前页面仅保留产品入口，不展示未经确认的介绍与参数。",
+    items: ["产品介绍待更新", "型号与参数待更新"],
+    status: "待后续更新",
+  },
+  {
+    slug: "detector",
+    n: "08",
+    title: "探测器",
+    desc: "客户原始资料标注为后续更新内容，当前页面仅保留产品入口，不展示未经确认的介绍与参数。",
+    items: ["产品介绍待更新", "型号与参数待更新"],
+    status: "待后续更新",
+  },
+];
+
+// 应用领域来自客户后续提供的公司简介，不与具体产品系列强行绑定。
+export const applicationAreas = [
+  "荧光分析领域",
+  "成像领域",
+  "衍射分析",
+  "厚度测量",
+  "密度测量",
+  "应力分析",
 ];
 
 export const processSteps = [

@@ -6,10 +6,10 @@ import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { applicationAreas, processSteps, products } from "./site-data";
 
 const slides = [
-  { image: "/hero-xray.png", eyebrow: "PRECISION X-RAY TECHNOLOGY", title: <>洞见微观<br/><em>定义精密</em></>, copy: <>专注高端低能X射线管及配套服务<br/>以精密制造，赋能每一次可靠检测</> },
+  { image: "/hero-light-xray.png", eyebrow: "PRECISION X-RAY TECHNOLOGY", title: <>洞见微观<br/><em>定义精密</em></>, copy: <>专注高端低能X射线管及配套服务<br/>以精密制造，赋能每一次可靠检测</> },
   { image: "/yonc-factory.jpg", eyebrow: "YONC · SHANGHAI", title: <>扎根制造<br/><em>长期可靠</em></>, copy: <>优能创（上海）电气科技有限公司<br/>研发、生产、销售与配套服务一体化</> },
-  { image: "/images/hero-process-candidates/yonc-process-01-glass-sealing.png", eyebrow: "MANUFACTURING PROCESS", title: <>制造工艺<br/><em>严格品控</em></>, copy: <>工艺画面为现阶段演示素材<br/>实际设备与流程将在资料完善后更新</> },
-  { image: "/hero-application.png", eyebrow: "ENGINEERED FOR APPLICATIONS", title: <>多元应用<br/><em>精准适配</em></>, copy: <>服务荧光分析、工业成像、衍射分析<br/>厚度、密度与应力测量等领域</> },
+  { image: "/hero-light-process.png", eyebrow: "MANUFACTURING PROCESS", title: <>制造工艺<br/><em>严格品控</em></>, copy: <>从关键工序到全参数检测<br/>以完整工艺体系守护稳定性能</> },
+  { image: "/hero-light-application.png", eyebrow: "ENGINEERED FOR APPLICATIONS", title: <>多元应用<br/><em>精准适配</em></>, copy: <>服务荧光分析、工业成像、衍射分析<br/>厚度、密度与应力测量等领域</> },
 ];
 
 export default function Home() {

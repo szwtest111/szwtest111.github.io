@@ -13,7 +13,6 @@ const slides = [
 ];
 
 export default function Home() {
-  const [activeProduct, setActiveProduct] = useState(0);
   const [slide, setSlide] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
@@ -39,7 +38,6 @@ export default function Home() {
       <SiteHeader />
       <section className={`hero ${carouselPaused ? "carousel-paused" : ""}`} id="top" aria-roledescription="carousel" aria-label="YONC品牌展示" onMouseEnter={() => setCarouselPaused(true)} onMouseLeave={() => setCarouselPaused(false)} onFocusCapture={() => setCarouselPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setCarouselPaused(false); }}>
         {slides.map((item, index) => <div key={item.image} className={`hero-image ${slide === index ? "active" : ""} ${index === 1 ? "factory-slide" : ""}`} style={{ backgroundImage: `url('${item.image}')` }} aria-hidden={slide !== index} />)}
-        <div className="hero-grid" />
         <div className="hero-content" key={slide}>
           <p className="eyebrow"><span /> {slides[slide].eyebrow}</p>
           <h1>{slides[slide].title}</h1>
@@ -51,7 +49,6 @@ export default function Home() {
           <button type="button" className="hero-next" onClick={() => go(slide + 1)} aria-label="下一张轮播图">→</button>
         </div>
         <div className="hero-dots">{slides.map((_, i) => <button type="button" key={i} className={slide === i ? "active" : ""} onClick={() => go(i)} aria-label={`查看第${i + 1}张`} aria-current={slide === i ? "true" : undefined} />)}</div>
-        <div className="hero-stat"><small>YONC CORE VALUE</small><b>6</b><span>道核心制造工序</span></div>
       </section>
 
       <section className="intro" id="about" data-scene>
@@ -70,16 +67,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="products" id="products" data-scene>
-        <div className="section-head" data-reveal><div className="section-label light"><span>02</span> PRODUCTS</div><h2>产品与业务方向</h2><p>产品体系持续完善<br/>具体型号与参数后续补充</p></div>
-        <div className="product-stage" data-reveal>
-          <div className="product-list">{products.map((p, i) => <Link href={`/products/${p.slug}`} key={p.n} className={activeProduct === i ? "active" : ""} onMouseEnter={() => setActiveProduct(i)} onFocus={() => setActiveProduct(i)}><small>{p.n}</small><span>{p.title}</span><b>↗</b></Link>)}</div>
-          <div className="product-detail" key={activeProduct}>
-            <div className="orb"><span>{products[activeProduct].n}</span><i/><i/><i/></div>
-            <p>PRODUCT SERIES · {products[activeProduct].n}</p><h3>{products[activeProduct].title}</h3><div className="rule"/><blockquote>{products[activeProduct].desc}</blockquote>
-            <div className="tags">{products[activeProduct].items.map(t => <span key={t}>{t}</span>)}</div>
-            <Link href={`/products/${products[activeProduct].slug}`}>查看产品详情 <b>→</b></Link>
-          </div>
+      <section className="products home-products" id="products" data-scene>
+        <div className="section-head" data-reveal><div className="section-label"><span>02</span> PRODUCTS</div><h2>核心产品与服务</h2><Link href="/products" className="section-more">查看全部产品 <b>→</b></Link></div>
+        <div className="home-product-grid">
+          {products.slice(0, 6).map(product => <Link href={`/products/${product.slug}`} key={product.n} className="home-product-card" data-reveal><small>{product.n}</small><h3>{product.title}</h3><p>{product.desc}</p><div>{product.items.slice(0, 2).map(item => <span key={item}>{item}</span>)}</div><b>查看详情 <i>↗</i></b></Link>)}
         </div>
       </section>
 
@@ -89,10 +80,10 @@ export default function Home() {
         <div className="application-tags" data-reveal="right">{applicationAreas.map(area => <span key={area}>{area}</span>)}</div>
       </section>
 
-      <section className="capability" id="capability" data-scene>
+      <section className="capability simple-capability" id="capability" data-scene>
         <div className="section-label" data-reveal="left"><span>04</span> MANUFACTURING</div>
-        <div className="cap-copy" data-reveal><p className="kicker">QUALITY FROM THE SOURCE</p><h2>完整工艺体系<br/>贯穿每支产品</h2><p>引进精良的生产设备和精密检测设备，从原材料到成品建立完整工艺闭环，让可靠性在每一道工序中被验证。</p></div>
-        <div className="process-orbit" data-reveal="scale"><div className="process-core">YONC<br/><small>QUALITY SYSTEM</small></div>{processSteps.map((step, i) => <span key={step} className={`process-node pn${i + 1}`}><b>0{i + 1}</b><small>{step}</small></span>)}</div>
+        <div className="cap-copy" data-reveal><p className="kicker">QUALITY FROM THE SOURCE</p><h2>六道核心工序<br/>建立制造闭环</h2><p>从基材预处理到封装出货，关键环节经过规范作业与质量检测，让每支产品的稳定性得到持续验证。</p><Link href="/about">了解制造与品质体系 <b>→</b></Link></div>
+        <div className="process-linear" data-reveal>{processSteps.map((step, i) => <article key={step}><b>{String(i + 1).padStart(2, "0")}</b><span>{step}</span></article>)}</div>
       </section>
 
       <section className="factory-story" data-scene>

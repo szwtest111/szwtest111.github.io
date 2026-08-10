@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 const REVEAL_SELECTOR = "[data-reveal]";
+const SCENE_SELECTOR = "[data-scene]";
 
 export function SiteExperience() {
   const pathname = usePathname();
@@ -31,7 +32,10 @@ export function SiteExperience() {
   useEffect(() => {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const compactViewport = window.matchMedia("(max-width: 900px)").matches;
     const nodes = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
+    const scenes = compactViewport ? [] : Array.from(document.querySelectorAll<HTMLElement>(SCENE_SELECTOR));
+    const standaloneNodes = compactViewport ? nodes : nodes.filter(node => !node.closest(SCENE_SELECTOR));
     let revealFrame = 0;
 
     const finishRoute = window.setTimeout(() => root.classList.remove("route-changing"), 360);
@@ -42,26 +46,42 @@ export function SiteExperience() {
       return () => window.clearTimeout(finishRoute);
     }
 
-    const observer = new IntersectionObserver(
+    const revealNode = (node: Element) => node.classList.add("is-visible");
+
+    const sceneObserver = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          entry.target.classList.add("is-scene-active");
+          entry.target.querySelectorAll(REVEAL_SELECTOR).forEach(revealNode);
+          sceneObserver.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -7% 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -18% 0px" },
+    );
+
+    const nodeObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          revealNode(entry.target);
+          nodeObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -14% 0px" },
     );
 
     revealFrame = window.requestAnimationFrame(() => {
       root.classList.add("motion-ready");
-      nodes.forEach(node => observer.observe(node));
+      scenes.forEach(scene => sceneObserver.observe(scene));
+      standaloneNodes.forEach(node => nodeObserver.observe(node));
     });
 
     return () => {
       window.clearTimeout(finishRoute);
       window.cancelAnimationFrame(revealFrame);
-      observer.disconnect();
+      sceneObserver.disconnect();
+      nodeObserver.disconnect();
     };
   }, [pathname]);
 

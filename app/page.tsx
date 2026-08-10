@@ -54,7 +54,7 @@ export default function Home() {
         <div className="hero-stat"><small>YONC CORE VALUE</small><b>5</b><span>道核心质量工序</span></div>
       </section>
 
-      <section className="intro" id="about">
+      <section className="intro" id="about" data-scene>
         <div className="section-label" data-reveal="left"><span>01</span> ABOUT YONC</div>
         <div className="intro-main" data-reveal><p className="kicker">质量为保障 · 创新为动力</p><h2>让关键部件，成为<br/>工业分析的<span>可靠底座</span></h2></div>
         <div className="intro-copy" data-reveal="right">
@@ -70,7 +70,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="products" id="products">
+      <section className="products" id="products" data-scene>
         <div className="section-head" data-reveal><div className="section-label light"><span>02</span> PRODUCTS</div><h2>产品与业务方向</h2><p>产品体系持续完善<br/>具体型号与参数后续补充</p></div>
         <div className="product-stage" data-reveal>
           <div className="product-list">{products.map((p, i) => <Link href={`/products/${p.slug}`} key={p.n} className={activeProduct === i ? "active" : ""} onMouseEnter={() => setActiveProduct(i)} onFocus={() => setActiveProduct(i)}><small>{p.n}</small><span>{p.title}</span><b>↗</b></Link>)}</div>
@@ -83,25 +83,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="application-band" aria-label="应用领域">
+      <section className="application-band" aria-label="应用领域" data-scene>
         <div className="section-label" data-reveal="left"><span>03</span> APPLICATIONS</div>
         <div data-reveal><p className="kicker">APPLICATION AREAS</p><h2>多元应用领域</h2></div>
         <div className="application-tags" data-reveal="right">{applicationAreas.map(area => <span key={area}>{area}</span>)}</div>
       </section>
 
-      <section className="capability" id="capability">
+      <section className="capability" id="capability" data-scene>
         <div className="section-label" data-reveal="left"><span>04</span> MANUFACTURING</div>
         <div className="cap-copy" data-reveal><p className="kicker">QUALITY FROM THE SOURCE</p><h2>完整工艺体系<br/>贯穿每支产品</h2><p>引进精良的生产设备和精密检测设备，从原材料到成品建立完整工艺闭环，让可靠性在每一道工序中被验证。</p></div>
         <div className="process-orbit" data-reveal="scale"><div className="process-core">YONC<br/><small>QUALITY SYSTEM</small></div>{processSteps.map((step, i) => <span key={step} className={`process-node pn${i + 1}`}><b>0{i + 1}</b><small>{step}</small></span>)}</div>
       </section>
 
-      <section className="factory-story">
+      <section className="factory-story" data-scene>
         <div className="factory-photo" data-reveal="left"><img src="/yonc-factory.jpg" alt="优能创生产基地" /></div>
         <div className="factory-copy" data-reveal="right"><p className="kicker">YONC · SHANGHAI</p><h2>以制造为根基<br/>以品质赢得信赖</h2><p>质量可靠、性能稳定、价格合理、服务热情，是优能创始终坚守的标准。用户的信赖与支持，是我们持续前进的动力。</p><Link href="/about">走进优能创 <b>↗</b></Link></div>
       </section>
 
-      <section className="service" id="service"><div data-reveal="left"><p className="eyebrow"><span/> SERVICE & SUPPORT</p><h2>服务与业务方向</h2></div><div className="service-grid"><article data-reveal><b>01</b><h3>配套服务</h3><p>围绕X射线管产品提供配套服务，具体服务内容与标准后续完善。</p></article><article data-reveal><b>02</b><h3>进口维修替代</h3><p>适配品牌、型号范围与维修服务内容将在资料完善后更新。</p></article><article data-reveal><b>03</b><h3>研发定制</h3><p>定制范围、合作流程与交付方式将在资料完善后更新。</p></article></div></section>
-      <section className="contact" id="contact">
+      <section className="service" id="service" data-scene><div data-reveal="left"><p className="eyebrow"><span/> SERVICE & SUPPORT</p><h2>服务与业务方向</h2></div><div className="service-grid"><article data-reveal><b>01</b><h3>配套服务</h3><p>围绕X射线管产品提供配套服务，具体服务内容与标准后续完善。</p></article><article data-reveal><b>02</b><h3>进口维修替代</h3><p>适配品牌、型号范围与维修服务内容将在资料完善后更新。</p></article><article data-reveal><b>03</b><h3>研发定制</h3><p>定制范围、合作流程与交付方式将在资料完善后更新。</p></article></div></section>
+      <section className="contact" id="contact" data-scene>
         <div className="contact-lead" data-reveal="left"><p>START A PROJECT</p><h2>让我们一起<br/>解决下一个<span>精密难题</span></h2><span>针对产品资料、配套服务、进口维修替代与研发定制需求，我们期待与您进一步沟通。</span></div>
         <div className="contact-info" data-reveal="right">
           <article><small>PHONE</small><b>后续待补充</b><span>技术咨询电话</span></article>

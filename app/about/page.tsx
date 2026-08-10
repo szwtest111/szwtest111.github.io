@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
-import { processSteps } from "../site-data";
+import { companyHighlights, coreCapabilities, processSteps } from "../site-data";
 
 export const metadata: Metadata = {
   title: "关于优能创｜YONC",
@@ -18,10 +18,17 @@ export default function AboutPage() {
         <div data-reveal><p className="kicker">优能创（上海）电气科技有限公司</p><h2>专注低能X射线技术<br/>服务精密分析与工业检测</h2></div>
         <div className="prose" data-reveal="right"><p>优能创（上海）电气科技有限公司，是一家专业研发、生产、销售高端低能X射线管及配套服务为一体的高科技型企业。</p><p>公司产品主要致力于结构分析X射线管、荧光分析X射线管、测厚X射线管、工业探伤X射线管，广泛应用于荧光分析领域、成像领域、衍射分析、厚度测量、密度测量、应力分析以及其他相关X射线领域。</p></div>
       </section>
+      <section className="company-highlights" aria-label="公司概览" data-reveal>
+        {companyHighlights.map(item => <article key={item.label}><b>{item.value}</b><span>{item.label}</span></article>)}
+      </section>
       <section className="about-image-band" data-reveal="scale"><img src="/yonc-factory.jpg" alt="优能创生产基地"/><div><b>YONC</b><span>SHANGHAI · CHINA</span></div></section>
+      <section className="core-capability-section">
+        <div className="capability-heading" data-reveal="left"><div className="inner-label">02 · CORE CAPABILITIES</div><p className="kicker">SAFETY · QUALITY · STABLE DELIVERY</p><h2>从开发到交付<br/>形成完整能力闭环</h2><p>依据客户X射线管应用场景，支持标准产品与非标定制方案，从试制、工艺调试到量产交付持续协同。</p></div>
+        <div className="core-capability-list">{coreCapabilities.map(item => <article key={item.n} data-reveal><b>{item.n}</b><div><h3>{item.title}</h3><p>{item.desc}</p></div></article>)}</div>
+      </section>
       <section className="quality-system">
         <div className="quality-title" data-reveal="left"><p className="kicker">COMPLETE QUALITY SYSTEM</p><h2>从源头把控品质<br/>让稳定成为标准</h2><p>公司引进精良的生产设备和精密检测设备，拥有经验丰富的研发团队和成熟的技工队伍。每支出厂产品均经过全参数检测和严苛品控，持续提升产品的性能稳定性与使用寿命。</p></div>
-        <div className="process-list">{processSteps.map((step, i) => <article key={step} data-reveal><b>0{i + 1}</b><h3>{step}</h3><p>{["具体检验项目与判定标准后续补充", "具体设备与工艺参数后续补充", "具体靶材及焊接标准后续补充", "具体电压范围与装配规范后续补充", "具体测试周期与判定标准后续补充"][i]}</p></article>)}</div>
+        <div className="process-list">{processSteps.map((step, i) => <article key={step} data-reveal><b>0{i + 1}</b><h3>{step}</h3><p>{["完成基材准备与前处理", "阴极、阳极等部件装配", "洁净环境下进行真空封接", "完成排气与老化处理", "开展高压与射线性能检测", "审核后完成防护封装与出货"][i]}</p></article>)}</div>
       </section>
       <section className="culture">
         <div className="inner-label" data-reveal>03 · CULTURE</div><h2 data-reveal>用户的信赖与支持<br/>是优能创前进的动力</h2>

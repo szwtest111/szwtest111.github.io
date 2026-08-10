@@ -51,7 +51,7 @@ export default function Home() {
           <button type="button" className="hero-next" onClick={() => go(slide + 1)} aria-label="下一张轮播图">→</button>
         </div>
         <div className="hero-dots">{slides.map((_, i) => <button type="button" key={i} className={slide === i ? "active" : ""} onClick={() => go(i)} aria-label={`查看第${i + 1}张`} aria-current={slide === i ? "true" : undefined} />)}</div>
-        <div className="hero-stat"><small>YONC CORE VALUE</small><b>5</b><span>道核心质量工序</span></div>
+        <div className="hero-stat"><small>YONC CORE VALUE</small><b>6</b><span>道核心制造工序</span></div>
       </section>
 
       <section className="intro" id="about" data-scene>
@@ -63,10 +63,10 @@ export default function Home() {
           <Link href="/about">完整了解优能创 <b>→</b></Link>
         </div>
         <div className="metrics" data-reveal>
-          <div><b>08<sup>项</sup></b><span>产品与业务方向</span></div>
-          <div><b>05<sup>道</sup></b><span>核心质量工序</span></div>
-          <div><b>100<sup>%</sup></b><span>出厂全参数检测</span></div>
-          <div><b>03<sup>档</sup></b><span>微焦点规格已列明</span></div>
+          <div><b>2022<sup>年</sup></b><span>公司成立</span></div>
+          <div><b>ISO<sup>9001</sup></b><span>品质体系</span></div>
+          <div><b>ISO<sup>7</sup></b><span>洁净室无尘作业</span></div>
+          <div><b>06<sup>道</sup></b><span>核心制造工序</span></div>
         </div>
       </section>
 

@@ -22,7 +22,7 @@ export default function ProductsPage() {
         <div><p className="kicker">APPLICATION AREAS</p><h2>多元应用领域</h2><span>覆盖荧光分析、成像、衍射、厚度、密度与应力分析等相关领域。</span></div>
         <div>{applicationAreas.map(area => <span key={area}>{area}</span>)}</div>
       </section>
-      <section className="inner-cta" data-reveal><p>CUSTOM ENGINEERING</p><h2>需要了解具体型号<br/>或研发定制方向？</h2><Link href="/#contact">联系优能创 <b>↗</b></Link></section>
+      <section className="inner-cta" data-reveal><p>CUSTOM ENGINEERING</p><h2>需要了解具体型号<br/>或研发定制方向？</h2><Link href="/contact">联系优能创 <b>↗</b></Link></section>
       <SiteFooter />
     </main>
   );

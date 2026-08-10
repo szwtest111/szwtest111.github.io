@@ -33,23 +33,32 @@ test("server-renders the YONC homepage", async () => {
   const html = await response.text();
   assert.match(html, /<title>YONC优能创｜高端低能X射线管<\/title>/i);
   assert.match(html, /优能创（上海）电气科技有限公司/);
-  assert.match(html, /产品与业务方向/);
-  assert.match(html, /完整工艺体系/);
+  assert.match(html, /产品中心/);
+  assert.match(html, /关于我们/);
+  assert.match(html, /联系我们/);
   assert.match(html, /data-scene="true"/);
+  assert.doesNotMatch(html, /研发制造|服务与业务方向|多元应用领域/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("keeps the homepage rhythm responsive and motion-safe", async () => {
-  const [css, page, experience, packageJson] = await Promise.all([
+test("keeps pages independent and navigation free of homepage anchors", async () => {
+  const [css, page, header, contact, experience, packageJson] = await Promise.all([
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/SiteChrome.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/contact/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/SiteExperience.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.ok((page.match(/data-scene/g) ?? []).length >= 7);
-  assert.match(css, /homepage chapter rhythm/);
-  assert.match(css, /clamp\(560px,68svh,720px\)/);
+  assert.equal((page.match(/data-scene/g) ?? []).length, 2);
+  assert.doesNotMatch(page, /href="(?:\/)?#/);
+  assert.doesNotMatch(header, /href="(?:\/)?#/);
+  assert.doesNotMatch(header, /研发制造|服务支持|企业动态/);
+  assert.match(header, /href="\/about"/);
+  assert.match(header, /href="\/products"/);
+  assert.match(header, /href="\/contact"/);
+  assert.match(contact, /联系我们/);
   assert.match(css, /@media\(max-width:900px\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(experience, /SCENE_SELECTOR/);

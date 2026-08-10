@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
-import { applicationAreas, processSteps, products } from "./site-data";
 
 const slides = [
   { image: "/hero-light-xray.png", eyebrow: "PRECISION X-RAY TECHNOLOGY", title: <>洞见微观<br/><em>定义精密</em></>, copy: <>专注高端低能X射线管及配套服务<br/>以精密制造，赋能每一次可靠检测</> },
@@ -42,7 +41,7 @@ export default function Home() {
           <p className="eyebrow"><span /> {slides[slide].eyebrow}</p>
           <h1>{slides[slide].title}</h1>
           <p className="hero-copy">{slides[slide].copy}</p>
-          <div className="hero-actions"><Link href="#products" className="primary">探索产品 <b>↗</b></Link><Link href="/about" className="text-link">了解优能创 <span>→</span></Link></div>
+          <div className="hero-actions"><Link href="/products" className="primary">产品中心 <b>↗</b></Link><Link href="/about" className="text-link">了解我们 <span>→</span></Link></div>
         </div>
         <div className="hero-nav">
           <button type="button" className="hero-prev" onClick={() => go(slide - 1)} aria-label="上一张轮播图">←</button>
@@ -51,49 +50,12 @@ export default function Home() {
         <div className="hero-dots">{slides.map((_, i) => <button type="button" key={i} className={slide === i ? "active" : ""} onClick={() => go(i)} aria-label={`查看第${i + 1}张`} aria-current={slide === i ? "true" : undefined} />)}</div>
       </section>
 
-      <section className="intro" id="about" data-scene>
-        <div className="section-label" data-reveal="left"><span>01</span> ABOUT YONC</div>
-        <div className="intro-main" data-reveal><p className="kicker">质量为保障 · 创新为动力</p><h2>让关键部件，成为<br/>工业分析的<span>可靠底座</span></h2></div>
-        <div className="intro-copy" data-reveal="right">
-          <p>优能创（上海）电气科技有限公司，是一家专业研发、生产、销售高端低能X射线管及配套服务为一体的高科技型企业。</p>
-          <p>公司拥有经验丰富的研发团队和成熟的技工队伍，从源头把控产品品质，持续提升X射线管的性能稳定性与使用寿命。</p>
-          <Link href="/about">完整了解优能创 <b>→</b></Link>
-        </div>
-        <div className="metrics" data-reveal>
-          <div><b>2022<sup>年</sup></b><span>公司成立</span></div>
-          <div><b>ISO<sup>9001</sup></b><span>品质体系</span></div>
-          <div><b>ISO<sup>7</sup></b><span>洁净室无尘作业</span></div>
-          <div><b>06<sup>道</sup></b><span>核心制造工序</span></div>
-        </div>
-      </section>
-
-      <section className="products home-products" id="products" data-scene>
-        <div className="section-head" data-reveal><div className="section-label"><span>02</span> PRODUCTS</div><h2>核心产品与服务</h2><Link href="/products" className="section-more">查看全部产品 <b>→</b></Link></div>
-        <div className="home-product-grid">
-          {products.slice(0, 6).map(product => <Link href={`/products/${product.slug}`} key={product.n} className="home-product-card" data-reveal><small>{product.n}</small><h3>{product.title}</h3><p>{product.desc}</p><div>{product.items.slice(0, 2).map(item => <span key={item}>{item}</span>)}</div><b>查看详情 <i>↗</i></b></Link>)}
-        </div>
-      </section>
-
-      <section className="application-band" aria-label="应用领域" data-scene>
-        <div className="section-label" data-reveal="left"><span>03</span> APPLICATIONS</div>
-        <div data-reveal><p className="kicker">APPLICATION AREAS</p><h2>多元应用领域</h2></div>
-        <div className="application-tags" data-reveal="right">{applicationAreas.map(area => <span key={area}>{area}</span>)}</div>
-      </section>
-
-      <section className="capability simple-capability" id="capability" data-scene>
-        <div className="section-label" data-reveal="left"><span>04</span> MANUFACTURING</div>
-        <div className="cap-copy" data-reveal><p className="kicker">QUALITY FROM THE SOURCE</p><h2>六道核心工序<br/>建立制造闭环</h2><p>从基材预处理到封装出货，关键环节经过规范作业与质量检测，让每支产品的稳定性得到持续验证。</p><Link href="/about">了解制造与品质体系 <b>→</b></Link></div>
-        <div className="process-linear" data-reveal>{processSteps.map((step, i) => <article key={step}><b>{String(i + 1).padStart(2, "0")}</b><span>{step}</span></article>)}</div>
-      </section>
-
-      <section className="factory-story" data-scene>
+      <section className="factory-story home-company" data-scene>
         <div className="factory-photo" data-reveal="left"><img src="/yonc-factory.jpg" alt="优能创生产基地" /></div>
-        <div className="factory-copy" data-reveal="right"><p className="kicker">YONC · SHANGHAI</p><h2>以制造为根基<br/>以品质赢得信赖</h2><p>质量可靠、性能稳定、价格合理、服务热情，是优能创始终坚守的标准。用户的信赖与支持，是我们持续前进的动力。</p><Link href="/about">走进优能创 <b>↗</b></Link></div>
+        <div className="factory-copy" data-reveal="right"><p className="kicker">ABOUT US</p><h2>关于我们</h2><p>优能创（上海）电气科技有限公司，是一家专业研发、生产、销售高端低能X射线管及配套服务为一体的高科技型企业。</p><p>公司产品广泛应用于荧光分析、X射线成像、衍射分析、厚度测量、密度测量、应力分析以及其他相关X射线领域。</p><Link href="/about">查看公司简介 <b>↗</b></Link></div>
       </section>
-
-      <section className="service" id="service" data-scene><div data-reveal="left"><p className="eyebrow"><span/> SERVICE & SUPPORT</p><h2>服务与业务方向</h2></div><div className="service-grid"><article data-reveal><b>01</b><h3>配套服务</h3><p>围绕X射线管产品提供配套服务，具体服务内容与标准后续完善。</p></article><article data-reveal><b>02</b><h3>进口维修替代</h3><p>适配品牌、型号范围与维修服务内容将在资料完善后更新。</p></article><article data-reveal><b>03</b><h3>研发定制</h3><p>定制范围、合作流程与交付方式将在资料完善后更新。</p></article></div></section>
-      <section className="contact" id="contact" data-scene>
-        <div className="contact-lead" data-reveal="left"><p>START A PROJECT</p><h2>让我们一起<br/>解决下一个<span>精密难题</span></h2><span>针对产品资料、配套服务、进口维修替代与研发定制需求，我们期待与您进一步沟通。</span></div>
+      <section className="contact home-contact" data-scene>
+        <div className="contact-lead" data-reveal="left"><p>CONTACT US</p><h2>联系我们</h2><span>欢迎就产品资料、配套服务、进口维修替代与研发定制需求与我们沟通。</span><Link href="/contact">查看联系方式 <b>↗</b></Link></div>
         <div className="contact-info" data-reveal="right">
           <article><small>PHONE</small><b>后续待补充</b><span>技术咨询电话</span></article>
           <article><small>EMAIL</small><b>后续待补充</b><span>商务与项目需求</span></article>

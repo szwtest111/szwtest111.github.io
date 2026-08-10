@@ -37,7 +37,7 @@ export function ProductsExplorer({ products }: { products: Product[] }) {
             ><small>{product.n}</small><span>{product.title}</span></a>
           ))}
         </nav>
-        <div><span>未找到合适产品？</span><Link href="/#contact">联系技术人员 <b>↗</b></Link></div>
+        <div><span>未找到合适产品？</span><Link href="/contact">联系技术人员 <b>↗</b></Link></div>
       </aside>
       <div className="catalog-results">
         <div className="catalog-toolbar"><span>全部产品与业务</span><small>共 {String(products.length).padStart(2, "0")} 个方向</small></div>

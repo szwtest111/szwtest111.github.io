@@ -4,13 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const homeSections = ["about", "products", "capability", "service", "contact"];
-
 export function SiteHeader() {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showTop, setShowTop] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const currentPathname = usePathname();
   const pathname = currentPathname === "/" ? currentPathname : currentPathname.replace(/\/+$/, "");
   const productPage = pathname === "/products" || pathname.startsWith("/products/");
@@ -24,17 +21,6 @@ export function SiteHeader() {
       setScrolled(scrollY > 32);
       setShowTop(scrollY > 720);
 
-      if (pathname !== "/") {
-        setActiveSection("");
-        return;
-      }
-
-      let current = "";
-      for (const id of homeSections) {
-        const section = document.getElementById(id);
-        if (section && section.offsetTop - 180 <= scrollY) current = id;
-      }
-      setActiveSection(current);
     };
 
     const onScroll = () => {
@@ -65,8 +51,9 @@ export function SiteHeader() {
   }, [menu]);
 
   const closeMenu = () => setMenu(false);
-  const aboutActive = pathname === "/about" || activeSection === "about";
-  const productActive = productPage || activeSection === "products";
+  const aboutActive = pathname === "/about";
+  const productActive = productPage;
+  const contactActive = pathname === "/contact";
 
   return (
     <>
@@ -75,14 +62,12 @@ export function SiteHeader() {
           <img src="/yonc-logo.jpg" alt="YONC优能创" />
         </Link>
         <nav id="site-navigation" className={menu ? "open" : ""} aria-label="主导航">
-          <Link href="/" className={pathname === "/" && !activeSection ? "active" : ""} aria-current={pathname === "/" && !activeSection ? "page" : undefined} onClick={closeMenu}>首页</Link>
-          <Link href="/about" className={aboutActive ? "active" : ""} aria-current={pathname === "/about" ? "page" : undefined} onClick={closeMenu}>关于优能创</Link>
+          <Link href="/" className={pathname === "/" ? "active" : ""} aria-current={pathname === "/" ? "page" : undefined} onClick={closeMenu}>首页</Link>
+          <Link href="/about" className={aboutActive ? "active" : ""} aria-current={aboutActive ? "page" : undefined} onClick={closeMenu}>关于我们</Link>
           <Link href="/products" className={productActive ? "active" : ""} aria-current={productPage ? "page" : undefined} onClick={closeMenu}>产品中心</Link>
-          <Link href="/#capability" className={activeSection === "capability" ? "active" : ""} onClick={closeMenu}>研发制造</Link>
-          <Link href="/#service" className={activeSection === "service" ? "active" : ""} onClick={closeMenu}>服务支持</Link>
-          <Link href="/#contact" className={activeSection === "contact" ? "active" : ""} onClick={closeMenu}>联系我们</Link>
+          <Link href="/contact" className={contactActive ? "active" : ""} aria-current={contactActive ? "page" : undefined} onClick={closeMenu}>联系我们</Link>
         </nav>
-        <div className="nav-right"><Link href="/#contact" className="nav-cta">联系优能创 <span>↗</span></Link></div>
+        <div className="nav-right"><Link href="/contact" className="nav-cta">联系优能创 <span>↗</span></Link></div>
         <button type="button" className={`menu ${menu ? "open" : ""}`} onClick={() => setMenu(value => !value)} aria-label={menu ? "收起导航" : "展开导航"} aria-expanded={menu} aria-controls="site-navigation"><span/><span/></button>
       </header>
       <button type="button" className={`menu-backdrop ${menu ? "open" : ""}`} onClick={closeMenu} aria-label="关闭导航" tabIndex={menu ? 0 : -1} />
@@ -96,7 +81,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <Link className="footer-logo" href="/"><img src="/yonc-logo.jpg" alt="YONC优能创" /></Link>
       <div className="footer-company"><b>优能创（上海）电气科技有限公司</b><span>高端低能X射线管及配套服务</span></div>
-      <div className="footer-links"><Link href="/about">关于</Link><Link href="/products">产品</Link><Link href="/#service">服务</Link><Link href="/#contact">联系</Link></div>
+      <div className="footer-links"><Link href="/about">关于我们</Link><Link href="/products">产品中心</Link><Link href="/contact">联系我们</Link></div>
       <span>© 2026 YONC · yonc.cn</span>
     </footer>
   );

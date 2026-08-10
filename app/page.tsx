@@ -8,7 +8,7 @@ import { applicationAreas, processSteps, products } from "./site-data";
 const slides = [
   { image: "/hero-xray.png", eyebrow: "PRECISION X-RAY TECHNOLOGY", title: <>洞见微观<br/><em>定义精密</em></>, copy: <>专注高端低能X射线管及配套服务<br/>以精密制造，赋能每一次可靠检测</> },
   { image: "/yonc-factory.jpg", eyebrow: "YONC · SHANGHAI", title: <>扎根制造<br/><em>长期可靠</em></>, copy: <>优能创（上海）电气科技有限公司<br/>研发、生产、销售与配套服务一体化</> },
-  { image: "/images/hero-process-candidates/yonc-process-01-glass-sealing.png", eyebrow: "MANUFACTURING PROCESS", title: <>制造工艺<br/><em>严格品控</em></>, copy: <>工艺画面为现阶段演示素材<br/>实际设备与流程以客户最终资料为准</> },
+  { image: "/images/hero-process-candidates/yonc-process-01-glass-sealing.png", eyebrow: "MANUFACTURING PROCESS", title: <>制造工艺<br/><em>严格品控</em></>, copy: <>工艺画面为现阶段演示素材<br/>实际设备与流程将在资料完善后更新</> },
   { image: "/hero-application.png", eyebrow: "ENGINEERED FOR APPLICATIONS", title: <>多元应用<br/><em>精准适配</em></>, copy: <>服务荧光分析、工业成像、衍射分析<br/>厚度、密度与应力测量等领域</> },
 ];
 
@@ -63,7 +63,7 @@ export default function Home() {
           <Link href="/about">完整了解优能创 <b>→</b></Link>
         </div>
         <div className="metrics" data-reveal>
-          <div><b>08<sup>项</sup></b><span>资料列明产品与业务方向</span></div>
+          <div><b>08<sup>项</sup></b><span>产品与业务方向</span></div>
           <div><b>05<sup>道</sup></b><span>核心质量工序</span></div>
           <div><b>100<sup>%</sup></b><span>出厂全参数检测</span></div>
           <div><b>03<sup>档</sup></b><span>微焦点规格已列明</span></div>
@@ -71,7 +71,7 @@ export default function Home() {
       </section>
 
       <section className="products" id="products">
-        <div className="section-head" data-reveal><div className="section-label light"><span>02</span> PRODUCTS</div><h2>产品与业务方向</h2><p>以下目录依据客户现有资料整理<br/>具体型号与参数待进一步补充</p></div>
+        <div className="section-head" data-reveal><div className="section-label light"><span>02</span> PRODUCTS</div><h2>产品与业务方向</h2><p>产品体系持续完善<br/>具体型号与参数后续补充</p></div>
         <div className="product-stage" data-reveal>
           <div className="product-list">{products.map((p, i) => <Link href={`/products/${p.slug}`} key={p.n} className={activeProduct === i ? "active" : ""} onMouseEnter={() => setActiveProduct(i)} onFocus={() => setActiveProduct(i)}><small>{p.n}</small><span>{p.title}</span><b>↗</b></Link>)}</div>
           <div className="product-detail" key={activeProduct}>
@@ -85,7 +85,7 @@ export default function Home() {
 
       <section className="application-band" aria-label="应用领域">
         <div className="section-label" data-reveal="left"><span>03</span> APPLICATIONS</div>
-        <div data-reveal><p className="kicker">APPLICATION AREAS</p><h2>客户资料列明的<br/>应用领域</h2></div>
+        <div data-reveal><p className="kicker">APPLICATION AREAS</p><h2>多元应用领域</h2></div>
         <div className="application-tags" data-reveal="right">{applicationAreas.map(area => <span key={area}>{area}</span>)}</div>
       </section>
 
@@ -100,12 +100,12 @@ export default function Home() {
         <div className="factory-copy" data-reveal="right"><p className="kicker">YONC · SHANGHAI</p><h2>以制造为根基<br/>以品质赢得信赖</h2><p>质量可靠、性能稳定、价格合理、服务热情，是优能创始终坚守的标准。用户的信赖与支持，是我们持续前进的动力。</p><Link href="/about">走进优能创 <b>↗</b></Link></div>
       </section>
 
-      <section className="service" id="service"><div data-reveal="left"><p className="eyebrow"><span/> SERVICE & SUPPORT</p><h2>客户资料列明的<br/>服务与业务方向</h2></div><div className="service-grid"><article data-reveal><b>01</b><h3>配套服务</h3><p>公司简介明确列明配套服务，具体服务内容与标准待客户补充。</p></article><article data-reveal><b>02</b><h3>进口维修替代</h3><p>原始产品资料明确列明该方向，适配品牌与型号范围待客户补充。</p></article><article data-reveal><b>03</b><h3>研发定制</h3><p>原始产品资料明确列明该方向，定制范围与合作流程待客户补充。</p></article></div></section>
+      <section className="service" id="service"><div data-reveal="left"><p className="eyebrow"><span/> SERVICE & SUPPORT</p><h2>服务与业务方向</h2></div><div className="service-grid"><article data-reveal><b>01</b><h3>配套服务</h3><p>围绕X射线管产品提供配套服务，具体服务内容与标准后续完善。</p></article><article data-reveal><b>02</b><h3>进口维修替代</h3><p>适配品牌、型号范围与维修服务内容将在资料完善后更新。</p></article><article data-reveal><b>03</b><h3>研发定制</h3><p>定制范围、合作流程与交付方式将在资料完善后更新。</p></article></div></section>
       <section className="contact" id="contact">
         <div className="contact-lead" data-reveal="left"><p>START A PROJECT</p><h2>让我们一起<br/>解决下一个<span>精密难题</span></h2><span>针对产品资料、配套服务、进口维修替代与研发定制需求，我们期待与您进一步沟通。</span></div>
         <div className="contact-info" data-reveal="right">
-          <article><small>PHONE</small><b>待客户补充</b><span>技术咨询电话</span></article>
-          <article><small>EMAIL</small><b>待客户补充</b><span>商务与项目需求</span></article>
+          <article><small>PHONE</small><b>后续待补充</b><span>技术咨询电话</span></article>
+          <article><small>EMAIL</small><b>后续待补充</b><span>商务与项目需求</span></article>
           <article><small>ADDRESS</small><b>上海 · 详细地址待补充</b><span>优能创（上海）电气科技有限公司</span></article>
           <p>正式联系方式确认后，本区域将开放电话、邮件和微信咨询入口。</p>
         </div>

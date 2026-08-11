@@ -189,3 +189,20 @@ a,button{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a:focus-v
   .products-explorer{padding:36px 24px 80px;display:block}.catalog-sidebar{position:sticky;z-index:8;top:72px;margin:0 -24px 28px;border-left:0;border-right:0;box-shadow:0 10px 24px rgba(36,68,86,.07)}.catalog-sidebar>p,.catalog-sidebar>div{display:none}.catalog-sidebar nav{overflow-x:auto;flex-direction:row;padding:8px 16px;scrollbar-width:none}.catalog-sidebar nav::-webkit-scrollbar{display:none}.catalog-sidebar nav a{flex:0 0 auto;min-height:44px;grid-template-columns:24px auto;padding:8px 12px;border-left:0;border-bottom:2px solid transparent;white-space:nowrap}.catalog-sidebar nav a.active{border-left:0;border-bottom-color:var(--red)}
   .product-row{min-height:0;padding:34px 0;grid-template-columns:28px 1fr 40px;gap:14px}.product-row-visual{grid-column:2/4;height:190px}.product-row-copy{grid-column:2/4}.product-row-link{grid-column:3;grid-row:1}.product-row-index{grid-column:1;grid-row:1}.product-row-copy h2{font-size:27px}.catalog-toolbar{height:46px}
 }
+
+/* product center v3 — source-backed product list */
+.products-page .catalog-sidebar nav{max-height:calc(100vh - 228px);overflow-y:auto}
+.products-page .catalog-sidebar nav button{min-height:58px}
+.products-page .catalog-sidebar nav button b{line-height:1.35}
+.products-page .catalog-sidebar nav button small{color:#94a3ab}
+.products-page .source-catalog-group{padding-top:32px}
+.products-page .source-catalog-group .product-card-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.products-page .product-catalog-card.is-pending .product-catalog-visual{background:linear-gradient(135deg,#f1f4f5,#e5eaed)}
+.products-page .product-catalog-card.is-pending .product-catalog-visual>span{color:rgba(54,73,83,.14)}
+.products-page .product-catalog-card.is-pending .product-card-meta>small{background:#f2f3f4;color:#8a969c}
+.products-page .product-catalog-card.is-pending .product-catalog-body>p{color:#89979e}
+@media(max-width:900px){
+  .products-page .catalog-sidebar nav{max-height:none;overflow-x:auto;overflow-y:hidden}
+  .products-page .catalog-sidebar nav button{min-height:44px}
+  .products-page .source-catalog-group{padding-top:24px}
+}

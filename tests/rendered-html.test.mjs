@@ -71,19 +71,30 @@ test("keeps pages independent and navigation free of homepage anchors", async ()
   );
 });
 
-test("product center provides family filters and full-card detail links", async () => {
-  const [explorer, productData] = await Promise.all([
+test("product center uses source-backed names without invented details", async () => {
+  const [explorer, productData, productPage, sourceMap] = await Promise.all([
     readFile(new URL("../app/products/ProductsExplorer.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/site-data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/products/[slug]/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../client-materials/source-to-website-map.md", import.meta.url), "utf8"),
   ]);
 
-  assert.match(explorer, /按产品族浏览/);
+  assert.match(explorer, /产品目录/);
+  assert.match(explorer, /全部产品/);
   assert.match(explorer, /aria-pressed/);
-  assert.match(explorer, /现有产品与业务/);
-  assert.match(explorer, /后续完善方向/);
   assert.match(explorer, /product-catalog-card/);
-  assert.doesNotMatch(explorer, /#catalog-/);
-  assert.match(productData, /family: "xray-tube"/);
-  assert.match(productData, /family: "power-source"/);
-  assert.match(productData, /family: "service"/);
+  assert.doesNotMatch(explorer, /产品族|family-/);
+  assert.match(productData, /35um焦点X射线管/);
+  assert.match(productData, /30KV/);
+  assert.match(productData, /结构分析X射线管/);
+  assert.doesNotMatch(productData, /适配品牌|维修内容|交付标准|合作流程/);
+  assert.doesNotMatch(productPage, /技术参数待补充|具体型号、参数/);
+  assert.match(sourceMap, /不允许自行补充/);
+
+  await Promise.all([
+    access(new URL("../client-materials/originals/images/yonc-factory-original.jpg", import.meta.url)),
+    access(new URL("../client-materials/originals/images/yonc-logo-original.jpg", import.meta.url)),
+    access(new URL("../client-materials/transcripts/company-profile.md", import.meta.url)),
+    access(new URL("../client-materials/transcripts/product-catalog-from-word.md", import.meta.url)),
+  ]);
 });

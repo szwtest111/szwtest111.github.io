@@ -206,3 +206,20 @@ a,button{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a:focus-v
   .products-page .catalog-sidebar nav button{min-height:44px}
   .products-page .source-catalog-group{padding-top:24px}
 }
+
+/* unified hero proportions and refined carousel chevrons */
+:root{--hero-visual-height:clamp(620px,78svh,720px)}
+.home-page .hero,.inner-page .inner-hero{height:var(--hero-visual-height);min-height:620px}
+.home-page .hero-nav button{width:36px;height:36px;border:1px solid rgba(36,65,81,.2);border-radius:50%;background:rgba(255,255,255,.74);display:grid;place-items:center;color:#233b48;box-shadow:0 8px 24px rgba(30,58,73,.1)}
+.home-page .hero-nav button>span{display:block;width:9px;height:9px;border-style:solid;border-color:currentColor;border-width:0 1.25px 1.25px 0;transition:transform var(--motion-fast) var(--ease-out)}
+.home-page .hero-prev>span{transform:translateX(1px) rotate(135deg)}
+.home-page .hero-next>span{transform:translateX(-1px) rotate(-45deg)}
+.home-page .hero-nav button:hover,.home-page .hero-nav button:focus-visible{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 10px 26px rgba(238,36,26,.2)}
+.home-page .hero-prev:hover>span,.home-page .hero-prev:focus-visible>span{transform:translateX(-1px) rotate(135deg)}
+.home-page .hero-next:hover>span,.home-page .hero-next:focus-visible>span{transform:translateX(1px) rotate(-45deg)}
+@media(max-width:900px){
+  :root{--hero-visual-height:620px}
+  .home-page .hero,.inner-page .inner-hero{height:var(--hero-visual-height);min-height:var(--hero-visual-height)}
+  .home-page .hero-nav button{width:34px;height:34px}
+  .home-page .hero-nav button>span{width:8px;height:8px;border-width:0 1.2px 1.2px 0}
+}

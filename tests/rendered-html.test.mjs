@@ -98,3 +98,17 @@ test("product center uses source-backed names without invented details", async (
     access(new URL("../client-materials/transcripts/product-catalog-from-word.md", import.meta.url)),
   ]);
 });
+
+test("uses one hero height and shaftless carousel chevrons", async () => {
+  const [home, css] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(home, /className="hero-prev"[\s\S]*?<span aria-hidden="true"/);
+  assert.match(home, /className="hero-next"[\s\S]*?<span aria-hidden="true"/);
+  assert.doesNotMatch(home, /className="hero-(?:prev|next)"[^>]*>[←→]/);
+  assert.match(css, /--hero-visual-height/);
+  assert.match(css, /\.home-page \.hero,\.inner-page \.inner-hero/);
+  assert.match(css, /border-width:0 1\.25px 1\.25px 0/);
+});

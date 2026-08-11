@@ -44,8 +44,8 @@ export default function Home() {
           <div className="hero-actions"><Link href="/products" className="primary">产品中心 <b>↗</b></Link><Link href="/about" className="text-link">了解我们 <span>→</span></Link></div>
         </div>
         <div className="hero-nav">
-          <button type="button" className="hero-prev" onClick={() => go(slide - 1)} aria-label="上一张轮播图">←</button>
-          <button type="button" className="hero-next" onClick={() => go(slide + 1)} aria-label="下一张轮播图">→</button>
+          <button type="button" className="hero-prev" onClick={() => go(slide - 1)} aria-label="上一张轮播图"><span aria-hidden="true" /></button>
+          <button type="button" className="hero-next" onClick={() => go(slide + 1)} aria-label="下一张轮播图"><span aria-hidden="true" /></button>
         </div>
         <div className="hero-dots">{slides.map((_, i) => <button type="button" key={i} className={slide === i ? "active" : ""} onClick={() => go(i)} aria-label={`查看第${i + 1}张`} aria-current={slide === i ? "true" : undefined} />)}</div>
       </section>

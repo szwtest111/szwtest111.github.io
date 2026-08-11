@@ -14,9 +14,9 @@ export default function ProductsPage() {
     <main className="inner-page products-page">
       <SiteHeader />
       <section className="inner-hero products-hero">
-        <div><nav className="breadcrumbs dark" aria-label="面包屑"><Link href="/">首页</Link><span>/</span><b>产品中心</b></nav><p>PRODUCT CENTER</p><h1>产品业务体系<br/><em>清晰分类展示</em></h1><span>产品系列 · 维修替代 · 高压电源 · 研发定制</span></div>
+        <div><nav className="breadcrumbs dark" aria-label="面包屑"><Link href="/">首页</Link><span>/</span><b>产品中心</b></nav><p>PRODUCT CENTER</p><h1>产品中心</h1><span>按产品族快速浏览产品、配套方向与定制服务</span></div>
       </section>
-      <section className="products-intro"><div className="inner-label" data-reveal="left">01 · PRODUCT CATALOG</div><div data-reveal><p className="kicker">PRODUCTS & SERVICES</p><h2>产品与业务目录<br/>聚焦现有方向</h2></div><p data-reveal="right">产品型号、性能参数、适配范围与实拍图片将随资料完善持续更新。</p></section>
+      <section className="products-intro"><div className="inner-label" data-reveal="left">01 · PRODUCT CATALOG</div><div data-reveal><p className="kicker">PRODUCTS & SERVICES</p><h2>从产品族开始<br/>更快找到所需方向</h2></div><p data-reveal="right">优先展示现有资料已列明的产品与业务，并将仍待补充的方向单独归类。选择左侧产品族即可快速筛选，点击任意产品卡片进入详情。</p></section>
       <ProductsExplorer products={products} />
       <section className="application-reference" data-reveal>
         <div><p className="kicker">APPLICATION AREAS</p><h2>多元应用领域</h2><span>覆盖荧光分析、成像、衍射、厚度、密度与应力分析等相关领域。</span></div>

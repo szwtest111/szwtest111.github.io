@@ -70,3 +70,20 @@ test("keeps pages independent and navigation free of homepage anchors", async ()
     access(new URL("public/_sites-preview", templateRoot)),
   );
 });
+
+test("product center provides family filters and full-card detail links", async () => {
+  const [explorer, productData] = await Promise.all([
+    readFile(new URL("../app/products/ProductsExplorer.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/site-data.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(explorer, /按产品族浏览/);
+  assert.match(explorer, /aria-pressed/);
+  assert.match(explorer, /现有产品与业务/);
+  assert.match(explorer, /后续完善方向/);
+  assert.match(explorer, /product-catalog-card/);
+  assert.doesNotMatch(explorer, /#catalog-/);
+  assert.match(productData, /family: "xray-tube"/);
+  assert.match(productData, /family: "power-source"/);
+  assert.match(productData, /family: "service"/);
+});

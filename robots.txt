@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://szwtest111-github-io.vercel.app/sitemap.xml
